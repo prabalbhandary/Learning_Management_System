@@ -13,7 +13,10 @@ import bookingRouter from "./routes/bookingRouter.js";
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+  origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL],
+  credentials: true 
+}));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
