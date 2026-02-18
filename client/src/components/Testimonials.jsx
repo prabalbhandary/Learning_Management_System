@@ -10,15 +10,12 @@ const Testimonials = () => {
         window.matchMedia &&
         window.matchMedia("(pointer:fine)").matches;
 
-    // Enhanced 3D tilt with parallax layers (no-op on small / touch devices)
     const onMouseMove = (e, el, index) => {
-        if (!el) return;
-        if (!isPointerDevice()) return; // disable tilt on touch / coarse-pointer devices
+        if (!el || !isPointerDevice()) return;
 
         const rect = el.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
-
         const px = (x - 0.5) * 2;
         const py = (y - 0.5) * 2;
 
@@ -30,35 +27,23 @@ const Testimonials = () => {
         const tx = px * translateMax;
         const ty = py * translateMax;
 
-        // Main card transform
         el.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) translate3d(${tx}px, ${ty}px, 0)`;
 
-        // Parallax effects for inner elements
         const avatar = el.querySelector(".avatar-container");
         const quote = el.querySelector(".quote-icon");
         const badge = el.querySelector(".course-badge");
 
-        if (avatar) {
-            avatar.style.transform = `translate3d(${tx * 0.3}px, ${ty * 0.3
-                }px, 20px)`;
-        }
-        if (quote && window.innerWidth >= 640) {
-            quote.style.transform = `translate3d(${tx * 0.5}px, ${ty * 0.5
-                }px, 40px) rotate(${ry * 2}deg)`;
-        }
-        if (badge) {
-            badge.style.transform = `translate3d(${tx * 0.2}px, ${ty * 0.2}px, 30px)`;
-        }
+        if (avatar) avatar.style.transform = `translate3d(${tx * 0.3}px, ${ty * 0.3}px, 20px)`;
+        if (quote && window.innerWidth >= 640) quote.style.transform = `translate3d(${tx * 0.5}px, ${ty * 0.5}px, 40px) rotate(${ry * 2}deg)`;
+        if (badge) badge.style.transform = `translate3d(${tx * 0.2}px, ${ty * 0.2}px, 30px)`;
     };
 
     const onMouseLeave = (el) => {
-        if (!el) return;
-        if (!isPointerDevice()) return; // nothing to reset on touch
+        if (!el || !isPointerDevice()) return;
 
         el.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) translate3d(0,0,0)`;
         el.style.transition = "transform 600ms cubic-bezier(.23,1,.32,1)";
 
-        // Reset parallax elements
         const avatar = el.querySelector(".avatar-container");
         const quote = el.querySelector(".quote-icon");
         const badge = el.querySelector(".course-badge");
@@ -105,8 +90,8 @@ const Testimonials = () => {
             <svg
                 key={i}
                 className={`${testimonialStyles.star} ${i < Math.floor(rating)
-                        ? testimonialStyles.starActive
-                        : testimonialStyles.starInactive
+                    ? testimonialStyles.starActive
+                    : testimonialStyles.starInactive
                     }`}
                 viewBox="0 0 24 24"
             >
@@ -129,12 +114,17 @@ const Testimonials = () => {
             </div>
             <div className={testimonialStyles.grid}>
                 {testimonials.map((t, i) => (
-                    <div onMouseMove={(e) => onMouseMove(e, cardsRef.current[i], i)} onMouseLeave={() => onMouseLeave(cardsRef.current[i])} key={t.id} className={testimonialStyles.cardWrapper}>
+                    <div
+                        onMouseMove={(e) => onMouseMove(e, cardsRef.current[i], i)}
+                        onMouseLeave={() => onMouseLeave(cardsRef.current[i])}
+                        key={t.id}
+                        className={testimonialStyles.cardWrapper}
+                    >
                         <div className={testimonialStyles.glowBorder}></div>
                         <div className={testimonialStyles.backgroundPattern} />
                         <div className={testimonialStyles.floatingElement1}></div>
                         <div className={testimonialStyles.floatingElement2}></div>
-                        <article ref={(el) => (cardsRef.current[i] = el)} className={testimonialStyles.card} style={{boxShadow: testimonialStyles.cardShadow}}>
+                        <article ref={(el) => (cardsRef.current[i] = el)} className={testimonialStyles.card} style={{ boxShadow: testimonialStyles.cardShadow }}>
                             <div className={testimonialStyles.courseBadge}>
                                 <div className={testimonialStyles.courseBadgeDot}></div>
                                 <span className={testimonialStyles.courseBadgeText}>{t.course}</span>

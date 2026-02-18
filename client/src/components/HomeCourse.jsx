@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { homeCoursesStyles } from '../assets/dummyStyles'
-import { coursesData } from "../assets/dummyHData"
+import { useEffect, useState } from 'react';
+import { homeCoursesStyles } from '../assets/dummyStyles';
+import { coursesData } from "../assets/dummyHData";
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Star, User } from 'lucide-react';
 import { Slide, toast, ToastContainer } from "react-toastify";
@@ -9,6 +9,7 @@ const HomeCourse = () => {
     const navigate = useNavigate();
     const { title, course: courseFont, detail } = homeCoursesStyles.fonts;
     const visibleCourses = coursesData.slice(0, 8);
+
     const [userRatings, setUserRatings] = useState(() => {
         try {
             const raw = localStorage.getItem("userCourseRatings");
@@ -17,6 +18,7 @@ const HomeCourse = () => {
             return {};
         }
     });
+
     const [hoverRatings, setHoverRatings] = useState({});
 
     useEffect(() => {
@@ -33,6 +35,7 @@ const HomeCourse = () => {
             theme: "dark",
         });
     };
+
     const handleCourseClick = (id) => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -40,7 +43,8 @@ const HomeCourse = () => {
             return;
         }
         navigate(`/course/${id}`);
-    }
+    };
+
     const handleBrowseClick = () => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -49,15 +53,17 @@ const HomeCourse = () => {
                 transition: Slide,
                 autoClose: 3000,
                 theme: "dark",
-            })
+            });
             return;
         }
         navigate("/courses");
-    }
+    };
+
     const handleSetRating = (e, courseId, rating) => {
         e.stopPropagation();
         setUserRatings((prev) => ({ ...prev, [courseId]: rating }));
     };
+
     const renderInteractiveStars = (course) => {
         const userRating = userRatings[course.id] || 0;
         const hover = hoverRatings[course.id] || 0;
@@ -113,40 +119,61 @@ const HomeCourse = () => {
                         <Star className={homeCoursesStyles.titleIcon} />
                     </h2>
                 </div>
+
                 <div className={homeCoursesStyles.coursesGrid}>
                     {visibleCourses.map((c) => {
                         const isFree = !!c.isFree || !c.price;
                         return (
-                            <div key={c.id} onClick={() => handleCourseClick(c.id)} className={homeCoursesStyles.courseCard}>
+                            <div
+                                key={c.id}
+                                onClick={() => handleCourseClick(c.id)}
+                                className={homeCoursesStyles.courseCard}
+                            >
                                 <div className={homeCoursesStyles.imageContainer}>
-                                    <img src={c.image} alt={c.name} className={homeCoursesStyles.courseImage} loading='lazy' />
+                                    <img
+                                        src={c.image}
+                                        alt={c.name}
+                                        className={homeCoursesStyles.courseImage}
+                                        loading="lazy"
+                                    />
                                 </div>
+
                                 <div className={homeCoursesStyles.courseInfo}>
-                                    <h3 className={`${courseFont} ${homeCoursesStyles.courseName}`}>{c.name}</h3>
+                                    <h3 className={`${courseFont} ${homeCoursesStyles.courseName}`}>
+                                        {c.name}
+                                    </h3>
+
                                     <div className={`${detail} ${homeCoursesStyles.teacherInfo}`}>
                                         <User size={15} className={homeCoursesStyles.teacherIcon} />
                                         <span className={homeCoursesStyles.teacherName}>{c.teacher}</span>
                                     </div>
+
                                     <div className={homeCoursesStyles.ratingContainer}>
                                         {renderInteractiveStars(c)}
                                     </div>
+
                                     <div className={homeCoursesStyles.pricingContainer}>
                                         {isFree ? (
                                             <span className={homeCoursesStyles.freePrice}>Free</span>
                                         ) : (
                                             <>
-                                                <span className={homeCoursesStyles.salePrice}>रु{c.price?.sale ?? "-"}</span>
+                                                <span className={homeCoursesStyles.salePrice}>
+                                                    रु{c.price?.sale ?? "-"}
+                                                </span>
                                                 {c.price?.original && (
-                                                    <span className={homeCoursesStyles.originalPrice}>रु{c.price.original}</span>
+                                                    <span className={homeCoursesStyles.originalPrice}>
+                                                        रु{c.price.original}
+                                                    </span>
                                                 )}
                                             </>
                                         )}
                                     </div>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
                 </div>
+
                 <div className={homeCoursesStyles.ctaContainer}>
                     <div className={homeCoursesStyles.ctaWrapper}>
                         <span
@@ -158,7 +185,8 @@ const HomeCourse = () => {
                                     "conic-gradient(from 0deg, rgba(236,72,153,0.9), rgba(99,102,241,0.9), rgba(139,92,246,0.9), rgba(236,72,153,0.9))",
                                 filter: "blur(5px)",
                                 opacity: 0.8,
-                            }} />
+                            }}
+                        />
                         <button
                             onClick={handleBrowseClick}
                             className={homeCoursesStyles.ctaButton}
@@ -175,10 +203,17 @@ const HomeCourse = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer position='top-right' autoClose={3000} theme='dark' transition={Slide} />
+
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                theme="dark"
+                transition={Slide}
+            />
+
             <style jsx>{homeCoursesStyles.animations}</style>
         </div>
-    )
-}
+    );
+};
 
-export default HomeCourse
+export default HomeCourse;

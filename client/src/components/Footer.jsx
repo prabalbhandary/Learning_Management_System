@@ -1,5 +1,16 @@
-import { footerStyles, footerBackgroundStyles, contactIconGradients, iconColors, footerCustomStyles } from '../assets/dummyStyles'
-import { socialIcons, quickLinks, supportLinks, contactInfo } from "../assets/dummyFooter"
+import {
+    footerStyles,
+    footerBackgroundStyles,
+    contactIconGradients,
+    iconColors,
+    footerCustomStyles
+} from '../assets/dummyStyles'
+import {
+    socialIcons,
+    quickLinks,
+    supportLinks,
+    contactInfo
+} from "../assets/dummyFooter"
 import logo from "../assets/logo.png"
 import {
     Twitter,
@@ -46,12 +57,13 @@ const Footer = () => {
                         className="w-full h-full"
                         style={{
                             backgroundImage: `linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)`,
+              linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)`,
                             backgroundSize: "50px 50px",
                         }}
                     />
                 </div>
             </div>
+
             <div className={footerStyles.container}>
                 <div className={footerStyles.grid}>
                     <div className={footerStyles.brandSection}>
@@ -63,9 +75,12 @@ const Footer = () => {
                                     <h3 className={footerStyles.brandTitle}>SkillForge</h3>
                                 </div>
                             </div>
-                            <p className={footerStyles.brandDescription}>Transform your learning journey with interactive courses and cutting-edge educational technology designed for modern learners.</p>
+                            <p className={footerStyles.brandDescription}>
+                                Transform your learning journey with interactive courses and cutting-edge educational technology designed for modern learners.
+                            </p>
                         </div>
                     </div>
+
                     <div>
                         <h4 className={`${footerStyles.sectionHeader} ${iconColors.cyan}`}>
                             <ArrowRight className={footerStyles.sectionIcon} />
@@ -76,7 +91,11 @@ const Footer = () => {
                                 const Icon = iconMap[l.icon] || ArrowRight;
                                 return (
                                     <li key={l.name}>
-                                        <a href={l.href} className={`${footerStyles.linkItem} ${iconColors.cyan}`} style={{ transitionDelay: `${i * 80}ms` }}>
+                                        <a
+                                            href={l.href}
+                                            className={`${footerStyles.linkItem} ${iconColors.cyan}`}
+                                            style={{ transitionDelay: `${i * 80}ms` }}
+                                        >
                                             <Icon className={`${footerStyles.linkIcon} ${iconColors.cyan}`} />
                                             <span className="truncate">{l.name}</span>
                                         </a>
@@ -85,6 +104,7 @@ const Footer = () => {
                             })}
                         </ul>
                     </div>
+
                     <div>
                         <h4 className={`${footerStyles.sectionHeader} ${iconColors.purple}`}>
                             <HandHelping className={footerStyles.sectionIcon} />
@@ -95,7 +115,11 @@ const Footer = () => {
                                 const Icon = iconMap[s.iconKey] || HelpCircle;
                                 return (
                                     <li key={s.name}>
-                                        <a href={s.href} className={`${footerStyles.linkItem} ${iconColors.purple}`} style={{ transitionDelay: `${i * 80}ms` }}>
+                                        <a
+                                            href={s.href}
+                                            className={`${footerStyles.linkItem} ${iconColors.purple}`}
+                                            style={{ transitionDelay: `${i * 80}ms` }}
+                                        >
                                             <Icon className={`${footerStyles.linkIcon} ${iconColors.purple}`} />
                                             <span className="truncate">{s.name}</span>
                                         </a>
@@ -104,11 +128,13 @@ const Footer = () => {
                             })}
                         </ul>
                     </div>
+
                     <div>
                         <h4 className={`${footerStyles.sectionHeader} ${iconColors.emerald}`}>
                             <Phone className={footerStyles.sectionIcon} />
                             Contact Us
                         </h4>
+
                         <div className={footerStyles.contactSpace}>
                             <div className={footerStyles.contactItem}>
                                 <div className={`${footerStyles.contactIconContainer} ${contactIconGradients.address}`}>
@@ -123,6 +149,7 @@ const Footer = () => {
                                     </p>
                                 </div>
                             </div>
+
                             <div className={footerStyles.contactItem}>
                                 <div className={`${footerStyles.contactIconContainer} ${contactIconGradients.phone}`}>
                                     <Phone className={`${footerStyles.contactIcon} ${iconColors.purple600}`} />
@@ -136,6 +163,7 @@ const Footer = () => {
                                     </p>
                                 </div>
                             </div>
+
                             <div className={footerStyles.contactItem}>
                                 <div className={`${footerStyles.contactIconContainer} ${contactIconGradients.email}`}>
                                     <Mail className={`${footerStyles.contactIcon} ${iconColors.emerald600}`} />
@@ -149,6 +177,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className={footerStyles.socialSection}>
                     <div className={footerStyles.socialContainer}>
                         <div className={footerStyles.socialIconsContainer}>
@@ -162,15 +191,11 @@ const Footer = () => {
                                         className={footerStyles.socialIconLink}
                                         style={{ animationDelay: `${index * 80}ms` }}
                                     >
-                                        {/* subtle hover overlay only matters on pointer devices */}
-                                        <div
-                                            className={`${footerStyles.socialIconContainer} ${social.bgColor}`}
-                                        >
+                                        <div className={`${footerStyles.socialIconContainer} ${social.bgColor}`}>
                                             <div className={footerStyles.socialIconInner}>
                                                 <IconComponent className={footerStyles.socialIcon} />
                                             </div>
 
-                                            {/* small tooltip on hover for pointer devices; hidden on touch by default */}
                                             <div className={footerStyles.socialTooltip}>
                                                 {social.name}
                                                 <div className={footerStyles.socialTooltipArrow} />
@@ -180,18 +205,26 @@ const Footer = () => {
                                 );
                             })}
                         </div>
+
                         <div className={footerStyles.designCredit}>
                             <div className={footerStyles.designCreditContainer}>
                                 <div className={footerStyles.designCreditGradient}></div>
                                 <p className={footerStyles.designCreditText}>
-                                    Designed by:{" "}
-                                    <a href={contactInfo.website} target='_blank' className={footerStyles.designCreditLink}>{contactInfo.designBy}</a>
+                                    Designed by{" "}
+                                    <a
+                                        href={contactInfo.website}
+                                        target="_blank"
+                                        className={footerStyles.designCreditLink}
+                                    >
+                                        {contactInfo.designBy}
+                                    </a>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <style>{footerCustomStyles}</style>
         </footer>
     )

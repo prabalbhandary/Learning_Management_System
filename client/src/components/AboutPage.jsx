@@ -14,7 +14,7 @@ const AboutPage = () => {
         certificates: 0,
         support: 0,
     });
-    // Animated counter effect using imported counterTargets
+
     useEffect(() => {
         const duration = 2000;
         const steps = 60;
@@ -43,15 +43,15 @@ const AboutPage = () => {
 
         return () => timers.forEach((t) => clearInterval(t));
     }, []);
-    // Helper to format display number per stat key
+
     const formatStatNumber = (key) => {
         if (key === "support") return "24/7";
         if (key === "successRate") return `${counterValues.successRate}%`;
         const val = counterValues[key] ?? 0;
-        // certificates might be large -> show with commas and plus
         if (key === "certificates") return `${val.toLocaleString()}+`;
         return `${val.toLocaleString()}+`;
     };
+
     return (
         <div className={aboutUsStyles.container}>
             <section className={aboutUsStyles.heroSection}>
@@ -66,16 +66,20 @@ const AboutPage = () => {
                     />
                     <div className={aboutUsStyles.heroTint}></div>
                 </div>
+
                 <div className={aboutUsStyles.heroContent}>
                     <div className={aboutUsStyles.trustBadge}>
                         <Star className={aboutUsStyles.trustIcon} />
                         Trusted by 50,000+ students worldwide
                     </div>
+
                     <h1 className={aboutUsStyles.mainHeading}>About LearnHub</h1>
+
                     <p className={aboutUsStyles.subHeading}>
                         Empowering millions to achieve dreams through
                         <span className={aboutUsStyles.inlineHighlight}>accessible education</span>
                     </p>
+
                     <div className={aboutUsStyles.statsGrid}>
                         {statsMeta.slice(0, 4).map((s, i) => (
                             <div key={i} className={aboutUsStyles.statCard} style={{ minWidth: 120 }}>
@@ -86,6 +90,7 @@ const AboutPage = () => {
                     </div>
                 </div>
             </section>
+
             {missionVisionValues.map((sec, i) => {
                 const Icon = sec.icon;
                 return (
@@ -97,13 +102,16 @@ const AboutPage = () => {
                                         <DotLottieReact src={sec.dotLottie} loop autoplay />
                                     </div>
                                 </div>
+
                                 <div className={`${aboutUsStyles.sectionContent} ${i % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
                                     <div className={aboutUsStyles.sectionBadge}>
                                         <Icon className={`${aboutUsStyles.sectionIcon} ${sec.color}`} />
                                         <span className={aboutUsStyles.sectionBadgeText}>{sec.subtitle}</span>
                                     </div>
+
                                     <h2 className={aboutUsStyles.sectionTitle}>{sec.title}</h2>
                                     <p className={aboutUsStyles.sectionDescription}>{sec.description}</p>
+
                                     <div className={aboutUsStyles.featuresContainer}>
                                         {sec.features.map((f, i) => (
                                             <div key={i} className={aboutUsStyles.featureItem}>
@@ -120,7 +128,7 @@ const AboutPage = () => {
                     </section>
                 )
             })}
-            {/* Enhanced Values Principles Section */}
+
             <section className={aboutUsStyles.valuesSection}>
                 <div className={aboutUsStyles.sectionGrid}>
                     <div className={aboutUsStyles.valuesHeader}>
@@ -130,9 +138,11 @@ const AboutPage = () => {
                                 Our Guiding Principles
                             </span>
                         </div>
+
                         <h2 className={aboutUsStyles.valuesTitle}>
                             Core Values That Define Us
                         </h2>
+
                         <p className={aboutUsStyles.valuesSubtitle}>
                             The foundation of everything we do at LearnHub
                         </p>
@@ -141,9 +151,7 @@ const AboutPage = () => {
                     <div className={aboutUsStyles.valuesGrid}>
                         {values.map((value, index) => (
                             <div key={index} className={aboutUsStyles.valueCard}>
-                                <div
-                                    className={`${aboutUsStyles.valueGradient} ${value.color}`}
-                                ></div>
+                                <div className={`${aboutUsStyles.valueGradient} ${value.color}`}></div>
 
                                 <h3
                                     className={aboutUsStyles.valueCardTitle}
@@ -178,12 +186,16 @@ const AboutPage = () => {
                     </div>
                 </div>
             </section>
+
             <section className={aboutUsStyles.teamSection}>
                 <div className={aboutUsStyles.sectionGrid}>
                     <div className={aboutUsStyles.teamHeader}>
                         <h2 className={aboutUsStyles.teamTitle}>Meet Our Leadership</h2>
-                        <p className={aboutUsStyles.teamSubtitle}>Passionate educators, innovators, and visionaries dedicated to your success</p>
+                        <p className={aboutUsStyles.teamSubtitle}>
+                            Passionate educators, innovators, and visionaries dedicated to your success
+                        </p>
                     </div>
+
                     <div className={aboutUsStyles.teamGrid}>
                         {teamMembers.map((t, i) => (
                             <div key={i} className={aboutUsStyles.teamMember}>
@@ -200,7 +212,7 @@ const AboutPage = () => {
                     </div>
                 </div>
             </section>
-            {/* Testimonials Section */}
+
             <section className={aboutUsStyles.testimonialsSection}>
                 <div className={aboutUsStyles.sectionGrid}>
                     <div className={aboutUsStyles.testimonialsHeader}>
@@ -211,6 +223,7 @@ const AboutPage = () => {
                             Real stories from real learners who transformed their careers
                         </p>
                     </div>
+
                     <div className={aboutUsStyles.testimonialsGrid}>
                         {testimonials.map((testimonial, index) => (
                             <div key={index} className={aboutUsStyles.testimonialCard}>
@@ -219,9 +232,11 @@ const AboutPage = () => {
                                         <Star key={i} className={aboutUsStyles.testimonialStar} />
                                     ))}
                                 </div>
+
                                 <p className={aboutUsStyles.testimonialText}>
                                     "{testimonial.text}"
                                 </p>
+
                                 <div className={aboutUsStyles.testimonialAuthor}>
                                     <img
                                         src={testimonial.image}
@@ -242,12 +257,17 @@ const AboutPage = () => {
                     </div>
                 </div>
             </section>
+
             <section className={aboutUsStyles.ctaSection}>
                 <div className={aboutUsStyles.ctaOrb1}></div>
                 <div className={aboutUsStyles.ctaOrb2}></div>
+
                 <div className={aboutUsStyles.ctaContent}>
                     <h2 className={aboutUsStyles.ctaTitle}>Ready to Transform Your Future?</h2>
-                    <p className={aboutUsStyles.ctaDescription}>Join millions of learners who have transformed their lives with LearnHub. Start your journey today with a 7-day free trial.</p>
+                    <p className={aboutUsStyles.ctaDescription}>
+                        Join millions of learners who have transformed their lives with LearnHub. Start your journey today with a 7-day free trial.
+                    </p>
+
                     <div className={aboutUsStyles.ctaButtons}>
                         <a href="/contact" className={aboutUsStyles.ctaButton}>
                             <MessageCircleCode className={aboutUsStyles.ctaButtonIcon} />
@@ -256,6 +276,7 @@ const AboutPage = () => {
                     </div>
                 </div>
             </section>
+
             <style jsx>{aboutUsAnimations}</style>
         </div>
     )

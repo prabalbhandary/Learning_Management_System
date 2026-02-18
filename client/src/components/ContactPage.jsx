@@ -11,6 +11,7 @@ const ContactPage = () => {
         subject: "",
         message: "",
     });
+
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [phoneError, setPhoneError] = useState("");
 
@@ -18,17 +19,20 @@ const ContactPage = () => {
         const { name, value } = e.target;
         if (name === "phone") setPhoneError("");
         setFormData({ ...formData, [name]: value });
-    }
+    };
 
     const validatePhone = (phone) => /^\d{10}$/.test(phone);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!validatePhone(formData.phone)) {
             setPhoneError("Invalid phone number");
             return;
         }
+
         setIsSubmitting(true);
+
         const whatsappMessage =
             `Name: ${formData.name}%0A` +
             `Email: ${formData.email}%0A` +
@@ -38,6 +42,7 @@ const ContactPage = () => {
 
         const whatsappUrl = `https://wa.me/9779865475613?text=${whatsappMessage}`;
         window.open(whatsappUrl, "_blank");
+
         setTimeout(() => {
             setFormData({
                 name: "",
@@ -45,11 +50,11 @@ const ContactPage = () => {
                 phone: "",
                 subject: "",
                 message: "",
-            })
+            });
             setIsSubmitting(false);
             setPhoneError("");
         }, 2000);
-    }
+    };
 
     const isFormValid =
         formData.name &&
@@ -64,13 +69,14 @@ const ContactPage = () => {
                 <div className={contactStyles.header}>
                     <h1 className={contactStyles.title}>Contact Us</h1>
                 </div>
-            </div> {/* Closes mainContainer */}
+            </div>
 
             <div className={contactStyles.mainSection}>
                 <div className={contactStyles.formContainer}>
                     <div className={contactStyles.formGlow1}></div>
                     <div className={contactStyles.formGlow2}></div>
                     <div className={contactStyles.formGlow3}></div>
+
                     <div className={contactStyles.form}>
                         <form className={contactStyles.formElements} onSubmit={handleSubmit}>
                             <div className={contactStyles.formGrid}>
@@ -89,6 +95,7 @@ const ContactPage = () => {
                                         required
                                     />
                                 </div>
+
                                 <div className={contactStyles.formGroup}>
                                     <label className={contactStyles.label}>
                                         <Mailbox className={`${contactStyles.labelIcon} ${contactStyles.colors.blue.icon}`} />
@@ -121,9 +128,7 @@ const ContactPage = () => {
                                     required
                                     inputMode="numeric"
                                     maxLength={10}
-                                    className={`${contactStyles.input} ${contactStyles.colors.green.focus
-                                        } ${contactStyles.colors.green.hover} ${phoneError ? contactStyles.inputError : ""
-                                        }`}
+                                    className={`${contactStyles.input} ${contactStyles.colors.green.focus} ${contactStyles.colors.green.hover} ${phoneError ? contactStyles.inputError : ""}`}
                                     placeholder="Enter your phone number"
                                 />
                                 {phoneError && (
@@ -131,7 +136,6 @@ const ContactPage = () => {
                                 )}
                             </div>
 
-                            {/* Subject */}
                             <div className={contactStyles.formGroup}>
                                 <label className={contactStyles.label}>
                                     <MessageSquare
@@ -179,9 +183,7 @@ const ContactPage = () => {
                                 className={`${contactStyles.submitButton} ${isFormValid && !isSubmitting ? contactStyles.submitButtonEnabled : contactStyles.submitButtonDisabled}`}
                             >
                                 {isSubmitting ? (
-                                    <>
-                                        <div className={contactStyles.spinner}>Sending...</div>
-                                    </>
+                                    <div className={contactStyles.spinner}>Sending...</div>
                                 ) : (
                                     <>
                                         <SendHorizonal className={contactStyles.submitIcon} />
@@ -193,7 +195,6 @@ const ContactPage = () => {
                     </div>
                 </div>
 
-                {/* Animation Section */}
                 <div className={contactStyles.animationContainer}>
                     <div className={contactStyles.animationWrapper}>
                         <DotLottieReact
@@ -208,9 +209,8 @@ const ContactPage = () => {
                         />
                     </div>
                 </div>
-            </div> {/* Closes mainSection */}
+            </div>
 
-            {/* footer info */}
             <div className={contactStyles.footer}>
                 <div className={contactStyles.footerBadge}>
                     <MessageCircle className={contactStyles.footerIcon} />
@@ -218,9 +218,9 @@ const ContactPage = () => {
                         All messages are sent directly to WhatsApp for immediate response.
                     </span>
                 </div>
-            </div> {/* Closes footer */}
-        </div> /* Closes container */
-    )
-}
+            </div>
+        </div>
+    );
+};
 
 export default ContactPage;
